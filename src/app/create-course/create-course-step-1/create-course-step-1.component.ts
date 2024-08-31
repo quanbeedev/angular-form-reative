@@ -41,7 +41,8 @@ export class CreateCourseStep1Component implements OnInit {
     description: [
       '',
       [Validators.required, Validators.minLength(3)]
-    ]
+    ],
+    address:[null, Validators.required]
   })
 
   CourseCategorys$: Observable<CourseCategory[]>;

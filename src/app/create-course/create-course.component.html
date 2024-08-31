@@ -3,9 +3,9 @@
 
   <h2 class="title">Create New Course</h2>
 
-  <mat-horizontal-stepper class="mat-elevation-z5" [linear]="false" labelPosition="bottom">
+  <mat-horizontal-stepper class="mat-elevation-z5" [linear]="true" labelPosition="bottom">
 
-    <mat-step [stepControl]="step1.form" errorMessage="Landing page still have error">
+    <mat-step [stepControl]="step1.form" [stepControl]="step1.form" errorMessage="Landing page still have error">
 
       <ng-template matStepLabel>
         course landing page detail
@@ -17,10 +17,10 @@
           <button mat-raised-button color="primary" matStepperNext> Continue to step 2</button>
         </div>
         
-    </mat-step>
+    </mat-step >
     
-    <mat-step errorMessage="Landing page still have error">
-      <create-course-step-2></create-course-step-2>
+    <mat-step [stepControl]="step2.form" errorMessage="Landing page still have error">
+      <create-course-step-2 #step2></create-course-step-2>
 
       <button mat-raised-button matStepperPrevious>
         Back
@@ -29,6 +29,21 @@
       <button mat-raised-button matStepperNext color="primary">
         Next to 3
       </button>
+    </mat-step>
+
+    <mat-step [stepControl]="step3.form" errorMessage="Landing page still have error">
+
+      <ng-template matStepLabel> course lessons </ng-template>
+      <create-course-step-3 #step3></create-course-step-3>
+
+      <button mat-raised-button matStepperPrevious>
+        Back
+      </button>
+
+      <button mat-raised-button color="primary" [disabled]="!step3.form.valid && step3.lessons.length > 0" (click)="submit(step1.form.value, step2.form.value, step3.form.value)">
+        Create Course
+      </button>
+
     </mat-step>
 
   </mat-horizontal-stepper>
